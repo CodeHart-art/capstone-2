@@ -16,6 +16,11 @@ public abstract class Product {
         return size;
     }
 
+
+    /**
+     * ALLOW EACH PRODUCT TO CALCULATE ITS OWN PRICE TO GET ORDER TOTAL IN THE FUTURE
+     * @return
+     */
     public abstract double calculatedPrice();
 
 }
