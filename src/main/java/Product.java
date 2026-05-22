@@ -8,6 +8,10 @@ public abstract class Product {
         this.size = size;
     }
 
+    public Product(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

@@ -1,12 +1,11 @@
 public class MainSide extends Product{
-    private String type;
 
-    public MainSide(String name, Size size) {
-        super(name, size);
+    public MainSide(String name) {
+        super(name);
     }
 
     @Override
     public double calculatedPrice() {
-        return 0;
+        return 1.50;
     }
 }
