@@ -39,11 +39,11 @@ public class Sandwich extends Product{
     }
     //endregion
 
-    public ArrayList<Topping> addTopping(){
+    public void addTopping(){
         //TODO add to list
     }
 
-    public ArrayList<Topping> removeTopping(){
+    public void removeTopping(){
         //TODO remove from list
     }
 

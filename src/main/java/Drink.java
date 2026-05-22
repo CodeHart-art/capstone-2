@@ -1,7 +1,7 @@
 public class Drink extends Product{
-    private String flavor;
+    private DrinkFlavor flavor;
 
-    public Drink(String name, Size size, String flavor) {
+    public Drink(String name, Size size, DrinkFlavor flavor) {
         super(name, size);
         this.flavor = flavor;
     }
