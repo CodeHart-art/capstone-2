@@ -15,7 +15,10 @@ public class Topping {
     }
 
     public double getPrice() {
-        return price;
+        if (type == ToppingType.MEAT){
+            price =
+        }
+
     }
 
     public ToppingType getType() {

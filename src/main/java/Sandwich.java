@@ -7,14 +7,16 @@ public class Sandwich extends Product{
     private ArrayList<Topping> otherToppings;
     private ArrayList<String> condiments;
     private boolean extraMeat;
+    private boolean extraCheese;
 
-    public Sandwich(String name, Size size, ArrayList<Topping> meats, ArrayList<Topping> premiumToppings, ArrayList<Topping> otherToppings, ArrayList<String> condiments, boolean extraMeat) {
+    public Sandwich(String name, Size size, ArrayList<Topping> meats, ArrayList<Topping> premiumToppings, ArrayList<Topping> otherToppings, ArrayList<String> condiments, boolean extraMeat,boolean extraCheese) {
         super(name, size);
-        this.meats = meats;
-        this.premiumToppings = premiumToppings;
-        this.otherToppings = otherToppings;
-        this.condiments = condiments;
-        this.extraMeat = extraMeat;
+        this.meats = new ArrayList<>();
+        this.premiumToppings = new ArrayList<>();
+        this.otherToppings = new ArrayList<>();
+        this.condiments = new ArrayList<>();
+        this.extraMeat = false;
+        this.extraCheese = false;
     }
 
     //region GETTERS
@@ -39,16 +41,28 @@ public class Sandwich extends Product{
     }
     //endregion
 
-    public void addTopping(){
-        //TODO add to list
+    public void addTopping(Topping topping){
+        meats.add(topping);
+        premiumToppings.add(topping);
+        otherToppings.add(topping);
     }
 
-    public void removeTopping(){
-        //TODO remove from list
+    public void removeTopping(Topping topping){
+        meats.remove(topping);
+        premiumToppings.remove(topping);
+        otherToppings.remove(topping);
+    }
+
+    public void addCondiment(String condiment){
+        condiments.add(condiment);
+    }
+
+    public void removeCondiment(String condiment){
+        condiments.remove(condiment);
     }
 
     @Override
-    public double calculatedPrice() {
+    public double calculatedPrice(){
         //TODO Calculate price DUHHHHH!
         return 0;
     }
