@@ -7,35 +7,48 @@ public class Order {
         this.items = new ArrayList<>();
     }
 
-    public void addProduct(Product product){
+    public void addProduct(Product product) {
         items.add(product);
     }
 
-    public void removeProduct(Product product){
+    public void removeProduct(Product product) {
         items.remove(product);
     }
 
-    public double calculateTotal(){
+    public double calculateTotal() {
         double total = 0;
-        for (Product p : items){
+        for (Product p : items) {
             total += p.calculatedPrice();
         }
         return total;
     }
 
-    public void clearOrder(){
-       items.clear();
-    }
+    public String getOrderInfo() {
+        String fullOrder = """
+                Here's your Order:
+                --------------------------------------
+                """;
 
-    public void getOrderInfo(){
-        for (Product p : items){
-            if (p instanceof Sandwich || p instanceof Drink){
-                p.getSize();
+        for (Product p : items) {
+            String size;
+            if (p.getSize() == null) {
+                size = "";
+            } else {
+                size = p.getSize().toString();
             }
-            p.getName();
-            p.calculatedPrice();
-        }
-    }
 
+            fullOrder += String.format(
+                    "%-20s %-10s $%.2f%n",
+                    p.getName(),
+                    size,
+                    p.calculatedPrice()
+            );
+        }
+
+        fullOrder += "--------------------------------------\n";
+        fullOrder += String.format("%-20s %-10s $%.2f%n", "", "TOTAL", calculateTotal());
+
+        return fullOrder;
+    }
 
 }

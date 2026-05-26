@@ -1,5 +1,3 @@
-
-
 public class Main {
     public static void main(String[] args) {
 
@@ -9,7 +7,7 @@ public class Main {
         Topping lettuce = new Topping("Lettuce", ToppingType.OTHER);
 
 
-        Sandwich order1 = new Sandwich("sandwich", Size.LARGE,BreadType.WHITE);
+        Sandwich order1 = new Sandwich("Sandwich", Size.LARGE,BreadType.WHITE);
 
         order1.addTopping(bacon);
         order1.addTopping(singles);
@@ -17,7 +15,21 @@ public class Main {
         order1.setExtraCheese();
         order1.setExtraMeat();
 
-        System.out.println(order1.calculatedPrice());
+        MainSide fries = new MainSide("Fries");
+        Drink pepsi = new Drink("Pepsi",Size.LARGE);
+
+        Order fullOrder = new Order();
+
+        fullOrder.addProduct(fries);
+        fullOrder.addProduct(order1);
+        fullOrder.addProduct(pepsi);
+
+        System.out.println(fullOrder.calculateTotal());
+        System.out.println(fullOrder.getOrderInfo());
+
+        ReceiptManager.writeReceipt(fullOrder);
+
+
 
     }
 }

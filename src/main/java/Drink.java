@@ -1,7 +1,7 @@
 public class Drink extends Product {
 
 
-    public Drink(String name, Size size, String flavor) {
+    public Drink(String name, Size size) {
         super(name, size);
 
     }
