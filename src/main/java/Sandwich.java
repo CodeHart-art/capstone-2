@@ -88,6 +88,7 @@ public class Sandwich extends Product {
         condiments.remove(condiment);
     }
 
+    //TODO make more efficient check size  then do calculation
     @Override
     public double calculatedPrice() {
         double baseCost = 0;
