@@ -93,24 +93,43 @@ public class Sandwich extends Product {
         double baseCost = 0;
 
         if (size == Size.SMALL) {
-           baseCost = 3.50;
+            baseCost = 3.50;
             if (!meats.isEmpty())
+                baseCost += 1.00;
+            if (!premiumToppings.isEmpty())
+                baseCost += .75;
+            if (extraMeat)
+                baseCost += .50;
+            if (extraCheese)
+                baseCost += .30;
 
-            return 0;
-        }
-        else if (size == Size.Medium) {
+            return baseCost;
+        } else if (size == Size.Medium) {
             baseCost = 8.50;
+            if (!meats.isEmpty())
+                baseCost += 2.00;
+            if (!premiumToppings.isEmpty())
+                baseCost += 1.50;
+            if (extraMeat)
+                baseCost += 1;
+            if (extraCheese)
+                baseCost += .60;
 
-
-            return 0;
-        }
-        else if (size == Size.LARGE) {
+            return baseCost;
+        } else if (size == Size.LARGE) {
             baseCost = 9.00;
+            if (!meats.isEmpty())
+                baseCost += 3.00;
+            if (!premiumToppings.isEmpty())
+                baseCost += 2.25;
+            if (extraMeat)
+                baseCost += 1.50;
+            if (extraCheese)
+                baseCost += .90;
 
-
-            return 0;
+            return baseCost;
         }
-        return 0;
+        return baseCost;
 
     }
 
