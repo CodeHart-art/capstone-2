@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Order {
     private ArrayList<Product> items;
 
-    public Order(ArrayList<Product> items) {
+    public Order() {
         this.items = new ArrayList<>();
     }
 
@@ -24,8 +24,16 @@ public class Order {
     }
 
     public void clearOrder(){
+       items.clear();
+    }
+
+    public void getOrderInfo(){
         for (Product p : items){
-            items.remove(p);
+            if (p instanceof Sandwich || p instanceof Drink){
+                p.getSize();
+            }
+            p.getName();
+            p.calculatedPrice();
         }
     }
 

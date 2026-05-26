@@ -10,9 +10,10 @@ public class Sandwich extends Product {
     private boolean extraMeat;
     private boolean extraCheese;
 
-    public Sandwich(String name, Size size, ArrayList<Topping> meats, ArrayList<Topping> premiumToppings, ArrayList<Topping> otherToppings, ArrayList<String> condiments, boolean extraMeat, boolean extraCheese, BreadType breadType) {
+    public Sandwich(String name, Size size, BreadType breadType) {
         super(name, size);
         this.breadType = breadType;
+
         this.meats = new ArrayList<>();
         this.premiumToppings = new ArrayList<>();
         this.otherToppings = new ArrayList<>();
@@ -88,7 +89,7 @@ public class Sandwich extends Product {
         condiments.remove(condiment);
     }
 
-    //TODO make more efficient check size  then do calculation
+    // TODO make more efficient check size  then do calculation
     @Override
     public double calculatedPrice() {
         double baseCost = 0;
