@@ -71,6 +71,61 @@ public class UI {
     }
 
     private static void addMainSide(Order currentOrder) {
+        String name = "";
+
+        boolean activeSideMenu = true;
+        while (activeSideMenu) {
+            System.out.println("""
+                    Select a Side
+                    1) Fries
+                    2) Mozzarella Sticks
+                    3) Popcorn Chicken
+                    4) Tomato Soup
+                    0) Return to Order Screen
+                    """);
+            String input = userInput.nextLine();
+            switch (input) {
+                case "1":
+                    name = "Fries";
+                    activeSideMenu = false;
+                    break;
+                case "2":
+                    name = "Mozzarella Sticks";
+                    activeSideMenu = false;
+                    break;
+                case "3":
+                    name = "Popcorn Chicken";
+                    activeSideMenu = false;
+                    break;
+                case "4":
+                    name = "Tomato Soup";
+                    activeSideMenu = false;
+                    break;
+                case "0":
+                    return;
+                default:
+                    System.out.println("Please select from provided options");
+            }
+        }
+
+        MainSide currentSide = new MainSide(name);
+
+        System.out.println("Add this side");
+        System.out.println("""
+                1) Yes
+                2) No
+                """);
+       String input = userInput.nextLine();
+
+        switch (input) {
+            case "1":
+                currentOrder.addProduct(currentSide);
+                break;
+            case "2":
+                break;
+            default:
+                System.out.println("Select provided options");
+        }
     }
 
     private static void addDrink(Order currentOrder) {
@@ -391,6 +446,4 @@ public class UI {
                 System.out.println("Select provided options");
         }
     }
-
-
 }
