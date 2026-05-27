@@ -20,14 +20,7 @@ public class Main {
 
         Order fullOrder = new Order();
 
-        fullOrder.addProduct(fries);
-        fullOrder.addProduct(order1);
-        fullOrder.addProduct(pepsi);
-
-        System.out.println(fullOrder.calculateTotal());
-        System.out.println(fullOrder.getOrderInfo());
-
-        ReceiptManager.writeReceipt(fullOrder);
+       UI.homeScreen();
 
 
 
