@@ -79,7 +79,7 @@ public class UI {
     private static void addSandwich(Order currentOrder) {
         BreadType breadType = null;
         Size size = null;
-        ToppingName tName = null;
+        boolean active = true;
 
         System.out.println("Select your bread");
         System.out.println("""
@@ -101,7 +101,7 @@ public class UI {
                 breadType = BreadType.RYE;
                 break;
             case "4":
-                breadType =BreadType.WRAP;
+                breadType = BreadType.WRAP;
                 break;
             default:
                 System.out.println("Please select from provided option");
@@ -116,11 +116,11 @@ public class UI {
                 """);
         input = userInput.nextLine();
 
-        switch (input){
+        switch (input) {
             case "1":
                 size = Size.SMALL;
                 break;
-            case "2" :
+            case "2":
                 size = Size.MEDIUM;
                 break;
             case "3":
@@ -130,7 +130,7 @@ public class UI {
                 System.out.println("Please select from provided options");
         }
 
-        Sandwich sandwich = new Sandwich("Sandwich",size,breadType);
+        Sandwich sandwich = new Sandwich("Sandwich", size, breadType);
 
         System.out.println("Select Meat options");
         System.out.println("""
@@ -140,16 +140,177 @@ public class UI {
                 4) Roast Beef
                 5) Chicken
                 6) Bacon
+                7) Skip Meats
                 """);
 
         input = userInput.nextLine();
 
-        switch (input){
+        switch (input) {
+            case "1":
+                sandwich.addTopping(ToppingObjects.steak());
+                break;
+            case "2":
+                sandwich.addTopping(ToppingObjects.ham());
+                break;
+            case "3":
+                sandwich.addTopping(ToppingObjects.salami());
+                break;
+            case "4":
+                sandwich.addTopping(ToppingObjects.roastBeef());
+                break;
+            case "5":
+                sandwich.addTopping(ToppingObjects.chicken());
+                break;
+            case "6":
+                sandwich.addTopping(ToppingObjects.bacon());
+                break;
+            case "7":
+                break;
+            default:
+                System.out.println("Select an OPTION");
+
+        }
+
+        System.out.println("Select a Premium Topping");
+        System.out.println("""
+                1) American Cheese
+                2) Provolone
+                3) Cheddar
+                4) Swiss
+                5) Skip Premium
+                """);
+        input = userInput.nextLine();
+
+        switch (input) {
+            case "1":
+                sandwich.addTopping(ToppingObjects.americanCheese());
+                break;
+            case "2":
+                sandwich.addTopping(ToppingObjects.provoloneCheese());
+                break;
+            case "3":
+                sandwich.addTopping(ToppingObjects.cheddarCheese());
+                break;
+            case "4":
+                sandwich.addTopping(ToppingObjects.swissCheese());
+                break;
+            case "5":
+                break;
+            default:
+                System.out.println("Select Provided Options");
+        }
+
+        while (active) {
+            System.out.println("Select Extra Toppings");
+            System.out.println("""
+                    1) Lettuce
+                    2) Peppers
+                    3) Onions
+                    4) Tomatoes
+                    5) Jalapenos
+                    6) Cucumbers
+                    7) Pickles
+                    8) Guacamole
+                    9) Mushrooms
+                    0) Next Menu
+                    """);
+
+            input = userInput.nextLine();
+
+            switch (input) {
+                case "1":
+                    sandwich.addTopping(ToppingObjects.lettuce());
+                    break;
+                case "2":
+                    sandwich.addTopping(ToppingObjects.peppers());
+                    break;
+                case "3":
+                    sandwich.addTopping(ToppingObjects.onions());
+                    break;
+                case "4":
+                    sandwich.addTopping(ToppingObjects.tomatoes());
+                    break;
+                case "5":
+                    sandwich.addTopping(ToppingObjects.jalapenos());
+                    break;
+                case "6":
+                    sandwich.addTopping(ToppingObjects.cucumber());
+                    break;
+                case "7":
+                    sandwich.addTopping(ToppingObjects.pickles());
+                    break;
+                case "8":
+                    sandwich.addTopping(ToppingObjects.guacamole());
+                    break;
+                case "9":
+                    sandwich.addTopping(ToppingObjects.mushrooms());
+                    break;
+                case "0":
+                    active = false;
+                    break;
+                default:
+                    System.out.println("Select Provided Options");
+            }
+
 
         }
 
 
+        System.out.println("Select a sauce");
+        System.out.println("""
+                1) Mayo
+                2) Ketchup
+                3) All Sauces
+                """);
+        input = userInput.nextLine();
 
+        switch (input) {
+            case "1":
+                sandwich.addCondiment("Mayo");
+                break;
+            case "2":
+                sandwich.addCondiment("Ketchup");
+                break;
+            case "3":
+                sandwich.addCondiment("MayoChup");
+                break;
+            default:
+                System.out.println("Select provided options");
+
+
+        }
+
+        System.out.println("Here's your sandwich");
+
+        for (Topping t : sandwich.getMeats()) {
+            System.out.println(t.getName());
+        }
+
+        for (Topping t : sandwich.getPremiumToppings()) {
+            System.out.println(t.getName());
+        }
+
+        for (Topping t : sandwich.getOtherToppings()) {
+            System.out.println(t.getName());
+        }
+
+        System.out.println("""
+                Would you like to keep this sandwich
+                1) Yes
+                2) No
+                """);
+
+        input = userInput.nextLine();
+
+        switch (input) {
+            case "1":
+                currentOrder.addProduct(sandwich);
+                break;
+            case "2":
+                break;
+            default:
+                System.out.println("Select provided options");
+        }
     }
 
 
