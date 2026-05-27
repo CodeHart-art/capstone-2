@@ -51,7 +51,7 @@ public class UI {
                     addDrink(currentOrder);
                     break;
                 case "3":
-                    addChips(currentOrder);
+                    addMainSide(currentOrder);
                     break;
                 case "4":
                     checkout(currentOrder);
@@ -70,10 +70,85 @@ public class UI {
     private static void checkout(Order currentOrder) {
     }
 
-    private static void addChips(Order currentOrder) {
+    private static void addMainSide(Order currentOrder) {
     }
 
     private static void addDrink(Order currentOrder) {
+        String name = null;
+        Size size = null;
+
+        System.out.println("Select Drink Size");
+        System.out.println("""
+                1)Small
+                2)Medium
+                3)Large
+                """);
+        String input = userInput.nextLine();
+
+        switch (input) {
+            case "1":
+                size = Size.SMALL;
+                break;
+            case "2":
+                size = Size.MEDIUM;
+                break;
+            case "3":
+                size = Size.LARGE;
+                break;
+            default:
+                System.out.println("Please select from provided options");
+        }
+
+        System.out.println("Select Flavor");
+        System.out.println("""
+                1) Pepsi
+                2) Sprite
+                3) Coca-Cola
+                4) Dr Pepper
+                """);
+
+        input = userInput.nextLine();
+
+        switch (input) {
+            case "1":
+                name = "Pepsi";
+                break;
+            case "2":
+                name = "Sprite";
+                break;
+            case "3":
+                name = "Coca-Cola";
+                break;
+            case "4":
+                name = "Dr Pepper";
+            default:
+                System.out.println("Please select from provided options");
+        }
+
+        Drink currentDrink = new Drink(name, size);
+
+        System.out.println("Here's your drink");
+
+        System.out.println(currentDrink);
+
+        System.out.println("""
+                Add Drink to your order
+                1) Yes
+                2) No
+                """);
+
+        input = userInput.nextLine();
+
+        switch (input) {
+            case "1":
+                currentOrder.addProduct(currentDrink);
+                break;
+            case "2":
+                break;
+            default:
+                System.out.println("Select provided options");
+        }
+
     }
 
     private static void addSandwich(Order currentOrder) {
@@ -281,7 +356,11 @@ public class UI {
         }
 
         System.out.println("Here's your sandwich");
+        System.out.println("----------");
 
+        System.out.println(sandwich.getBreadType());
+        System.out.println(sandwich.getSize());
+        System.out.println(sandwich.getCondiments());
         for (Topping t : sandwich.getMeats()) {
             System.out.println(t.getName());
         }

@@ -14,8 +14,15 @@ public class Drink extends Product {
         } else if (size == Size.MEDIUM) {
             return 2.50;
 
+        } else if (size == Size.LARGE) {
+            return 3.00;
         }
-        return 3.00;
+        return 0;
+    }
 
+    @Override
+    public String toString(){
+
+        return name +" "+size;
     }
 }
