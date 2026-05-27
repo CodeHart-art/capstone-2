@@ -1,3 +1,5 @@
 public enum Size {
-    SMALL,Medium,LARGE
+    SMALL,
+    MEDIUM,
+    LARGE
 }

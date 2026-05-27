@@ -1,0 +1,21 @@
+public enum ToppingName {
+    STEAK,
+    HAM,
+    SALAMI,
+    ROAST_BEEF,
+    CHICKEN,
+    BACON,
+    AMERICAN_CHEESE,
+    PROVOLONE,
+    CHEDDAR,
+    SWISS,
+    LETTUCE,
+    PEPPERS,
+    ONIONS,
+    TOMATOES,
+    JALAPENOS,
+    CUCUMBERS,
+    PICKLES,
+    GUACAMOLE,
+    MUSHROOMS
+}

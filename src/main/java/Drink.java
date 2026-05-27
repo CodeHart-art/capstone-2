@@ -11,7 +11,7 @@ public class Drink extends Product {
         if (size == Size.SMALL) {
             return 2.00;
 
-        } else if (size == Size.Medium) {
+        } else if (size == Size.MEDIUM) {
             return 2.50;
 
         }

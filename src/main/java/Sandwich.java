@@ -106,7 +106,7 @@ public class Sandwich extends Product {
                 baseCost += .30;
 
             return baseCost;
-        } else if (size == Size.Medium) {
+        } else if (size == Size.MEDIUM) {
             baseCost = 8.50;
             if (!meats.isEmpty())
                 baseCost += 2.00;
