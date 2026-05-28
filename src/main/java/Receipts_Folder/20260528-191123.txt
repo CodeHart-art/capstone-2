@@ -1,0 +1,7 @@
+Here's your Order:
+--------------------------------------
+Sandwich             LARGE      $16.15
+Sprite               MEDIUM     $2.50
+Mozzarella Sticks               $1.50
+--------------------------------------
+                     TOTAL      $20.15
