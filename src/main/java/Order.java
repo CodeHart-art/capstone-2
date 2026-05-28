@@ -51,4 +51,27 @@ public class Order {
         return fullOrder;
     }
 
+    public boolean isValidOrder() {
+
+        boolean hasSandwich = false;
+        boolean hasSide = false;
+
+        for (Product p : items) {
+
+            if (p instanceof Sandwich) {
+                hasSandwich = true;
+            }
+
+            if (p instanceof MainSide) {
+                hasSide = true;
+            }
+        }
+
+        return hasSandwich || hasSide;
+    }
+
+    public void clearOrder() {
+        items.clear();
+    }
+
 }

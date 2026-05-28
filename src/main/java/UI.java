@@ -68,6 +68,36 @@ public class UI {
     }
 
     private static void checkout(Order currentOrder) {
+
+        if (!currentOrder.isValidOrder()) {
+            System.out.println("Order must contain a sandwich or side");
+            return;
+        }
+
+
+        System.out.println("Here's your full order");
+        System.out.println(currentOrder.getOrderInfo());
+
+        System.out.println("""
+                Confirm Your Order
+                1) Yes
+                2) No
+                """);
+        String input = userInput.nextLine();
+
+        switch (input) {
+            case "1":
+                System.out.println("Thank you for you purchase");
+                System.out.println("Generating receipt...");
+
+                ReceiptManager.writeReceipt(currentOrder);
+                return;
+            case "2":
+                return;
+            default:
+                System.out.println("SELECT VALID OPTION");
+        }
+
     }
 
     private static void addMainSide(Order currentOrder) {
@@ -115,7 +145,7 @@ public class UI {
                 1) Yes
                 2) No
                 """);
-       String input = userInput.nextLine();
+        String input = userInput.nextLine();
 
         switch (input) {
             case "1":
