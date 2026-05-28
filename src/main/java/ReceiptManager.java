@@ -5,11 +5,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class ReceiptManager {
-    public static String FILE_PATH = "src/main/resources/receiptsFolder";
+    public static String FILE_PATH = "src/main/java/Receipts_Folder";
 
 
     public static void writeReceipt(Order order) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd-hhmmss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
         String localDateTime = LocalDateTime.now().format(formatter);
         String fileName = localDateTime + ".txt";
 
