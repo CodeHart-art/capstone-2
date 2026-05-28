@@ -6,11 +6,17 @@ public class UI {
 
     public static void homeScreen() {
         while (true) {
-            System.out.println("Welcome to the shop please enter an option");
             System.out.println("""
-                    1) NEW ORDER
-                    0) EXIT
-                    """);
+                    =================================
+                          WELCOME TO THE SHOP
+                    =================================
+                    
+                    Please select an option:
+                    
+                    1) New Order
+                    0) Exit
+                    
+                    >""");
             String input = userInput.nextLine();
 
             switch (input) {
@@ -21,7 +27,7 @@ public class UI {
                     System.out.println("EXITING PROGRAM...");
                     System.exit(0);
                 default:
-                    System.out.println("Select from available options");
+                    System.out.println("INVALID OPTION — TRY AGAIN");
             }
         }
 
@@ -33,14 +39,20 @@ public class UI {
         boolean active = true;
 
         while (active) {
-            System.out.println("Select your order");
             System.out.println("""
+                    =================================
+                           ORDER MENU
+                    =================================
+                    
+                    Select an option:
+                    
                     1) Add Sandwich
                     2) Add Drink
-                    3) Add chips
+                    3) Add Side
                     4) Checkout
                     0) Cancel Order
-                    """);
+                    
+                    >""");
             String input = userInput.nextLine();
 
             switch (input) {
@@ -55,13 +67,14 @@ public class UI {
                     break;
                 case "4":
                     checkout(currentOrder);
+                    active = false;
                     break;
                 case "0":
                     active = false;
                     System.out.println("Clearing order returning to main menu");
                     break;
                 default:
-                    System.out.println("SELECT FROM AVAILABLE OPTIONS");
+                    System.out.println("INVALID OPTION — TRY AGAIN");
                     break;
             }
         }
@@ -74,30 +87,45 @@ public class UI {
             return;
         }
 
+        System.out.println("""
+                =================================
+                          YOUR ORDER
+                =================================
+                """);
 
-        System.out.println("Here's your full order");
         System.out.println(currentOrder.getOrderInfo());
 
         System.out.println("""
-                Confirm Your Order
+                =================================
+                      CONFIRM YOUR ORDER
+                =================================
+                
                 1) Yes
                 2) No
-                """);
+                
+                >""");
+
         String input = userInput.nextLine();
 
         switch (input) {
-            case "1":
-                System.out.println("Thank you for you purchase");
-                System.out.println("Generating receipt...");
 
+            case "1":
+                System.out.println("""
+                        =================================
+                           ORDER COMPLETE
+                        =================================
+                        
+                        Thank you for your purchase.
+                        Generating receipt...
+                        """);
                 ReceiptManager.writeReceipt(currentOrder);
                 currentOrder.clearOrder();
-
                 return;
             case "2":
                 return;
             default:
-                System.out.println("SELECT VALID OPTION");
+                System.out.println("INVALID OPTION — TRY AGAIN");
+
         }
 
     }
@@ -108,13 +136,17 @@ public class UI {
         boolean activeSideMenu = true;
         while (activeSideMenu) {
             System.out.println("""
-                    Select a Side
+                    =================================
+                             SELECT A SIDE
+                    =================================
+                    
                     1) Fries
                     2) Mozzarella Sticks
                     3) Popcorn Chicken
                     4) Tomato Soup
                     0) Return to Order Screen
-                    """);
+                    
+                    >""");
             String input = userInput.nextLine();
             switch (input) {
                 case "1":
@@ -136,17 +168,21 @@ public class UI {
                 case "0":
                     return;
                 default:
-                    System.out.println("Please select from provided options");
+                    System.out.println("INVALID OPTION — TRY AGAIN");
             }
         }
 
         MainSide currentSide = new MainSide(name);
 
-        System.out.println("Add this side");
         System.out.println("""
+                =================================
+                       ADD THIS SIDE?
+                =================================
+                
                 1) Yes
                 2) No
-                """);
+                
+                >""");
         String input = userInput.nextLine();
 
         switch (input) {
@@ -164,12 +200,16 @@ public class UI {
         String name = null;
         Size size = null;
 
-        System.out.println("Select Drink Size");
         System.out.println("""
-                1)Small
-                2)Medium
-                3)Large
-                """);
+                =================================
+                      SELECT DRINK SIZE
+                =================================
+                
+                1) Small
+                2) Medium
+                3) Large
+                
+                >""");
         String input = userInput.nextLine();
 
         switch (input) {
@@ -186,13 +226,17 @@ public class UI {
                 System.out.println("Please select from provided options");
         }
 
-        System.out.println("Select Flavor");
         System.out.println("""
+                =================================
+                      SELECT DRINK FLAVOR
+                =================================
+                
                 1) Pepsi
                 2) Sprite
                 3) Coca-Cola
                 4) Dr Pepper
-                """);
+                
+                >""");
 
         input = userInput.nextLine();
 
@@ -209,20 +253,28 @@ public class UI {
             case "4":
                 name = "Dr Pepper";
             default:
-                System.out.println("Please select from provided options");
+                System.out.println("INVALID OPTION — TRY AGAIN");
         }
 
         Drink currentDrink = new Drink(name, size);
 
-        System.out.println("Here's your drink");
+        System.out.println("""
+                =================================
+                       YOUR DRINK
+                =================================
+                """);
 
         System.out.println(currentDrink);
 
         System.out.println("""
-                Add Drink to your order
+                =================================
+                ADD DRINK TO YOUR ORDER?
+                =================================
+                
                 1) Yes
                 2) No
-                """);
+                
+                >""");
 
         input = userInput.nextLine();
 
@@ -264,10 +316,16 @@ public class UI {
         boolean toastSelectionActive = true;
         while (toastSelectionActive) {
             System.out.println("""
+                    =================================
+                       TOASTED SANDWICH OPTION
+                    =================================
+                    
                     Do you want your sandwich toasted?
+                    
                     1) Yes
-                    2) NO
-                    """);
+                    2) No
+                    
+                    >""");
             String input = userInput.nextLine();
             switch (input) {
                 case "1":
@@ -278,7 +336,7 @@ public class UI {
                     toastSelectionActive = false;
                     break;
                 default:
-                    System.out.println("Select provided options");
+                    System.out.println("INVALID OPTION — TRY AGAIN");
             }
         }
     }
@@ -287,10 +345,16 @@ public class UI {
         boolean confirmSandwichActive = true;
         while (confirmSandwichActive) {
             System.out.println("""
-                    Would you like to keep this sandwich
+                    =================================
+                       ADD SANDWICH TO ORDER?
+                    =================================
+                    
+                    Would you like to keep this sandwich?
+                    
                     1) Yes
                     2) No
-                    """);
+                    
+                    >""");
 
             String input = userInput.nextLine();
 
@@ -303,43 +367,34 @@ public class UI {
                     confirmSandwichActive = false;
                     break;
                 default:
-                    System.out.println("Select provided options");
+                    System.out.println("INVALID OPTION — TRY AGAIN");
             }
         }
     }
 
     private static void previewSandwich(Sandwich sandwich) {
-        System.out.println("Here's your sandwich");
-        System.out.println("----------");
+        System.out.println("""
+                =================================
+                        YOUR SANDWICH
+                =================================
+                """);
 
-        System.out.println(sandwich.getBreadType());
-        System.out.println(sandwich.getSize());
-        for (String condiment : sandwich.getCondiments()) {
-            System.out.println(condiment);
-        }
-
-        for (Topping t : sandwich.getMeats()) {
-            System.out.println(t.getName());
-        }
-
-        for (Topping t : sandwich.getPremiumToppings()) {
-            System.out.println(t.getName());
-        }
-
-        for (Topping t : sandwich.getOtherToppings()) {
-            System.out.println(t.getName());
-        }
+        System.out.println(sandwich);
     }
 
     private static void selectCondiments(Sandwich sandwich) {
         boolean condimentSelectionActive = false;
         while (!condimentSelectionActive) {
-            System.out.println("Select a sauce");
             System.out.println("""
+                    =================================
+                          SELECT A SAUCE
+                    =================================
+                    
                     1) Mayo
                     2) Ketchup
                     3) All Sauces
-                    """);
+                    
+                    >""");
             String input = userInput.nextLine();
 
             switch (input) {
@@ -356,7 +411,7 @@ public class UI {
                     condimentSelectionActive = true;
                     break;
                 default:
-                    System.out.println("Select provided options");
+                    System.out.println("INVALID OPTION — TRY AGAIN");
 
 
             }
@@ -366,14 +421,18 @@ public class UI {
     private static void selectOtherTopping(Sandwich sandwich) {
         boolean toppingSelectionActive = true;
         while (toppingSelectionActive) {
-            System.out.println("Select Extra Toppings");
             System.out.println("""
-                    1) Lettuce      2) Peppers
-                    3) Onions       4) Tomatoes
-                    5) Jalapenos    6) Cucumbers
-                    7) Pickles      8) Guacamole
-                    9) Mushrooms    0) Next Menu
-                    """);
+                    =================================
+                       SELECT EXTRA TOPPINGS
+                    =================================
+                    
+                    1) Lettuce        2) Peppers
+                    3) Onions         4) Tomatoes
+                    5) Jalapenos      6) Cucumbers
+                    7) Pickles        8) Guacamole
+                    9) Mushrooms      0) Next Menu
+                    
+                    >""");
 
             String input = userInput.nextLine();
 
@@ -409,7 +468,7 @@ public class UI {
                     toppingSelectionActive = false;
                     break;
                 default:
-                    System.out.println("Select Provided Options");
+                    System.out.println("INVALID OPTION — TRY AGAIN");
             }
 
 
@@ -419,14 +478,18 @@ public class UI {
     private static void selectPremiumTopping(Sandwich sandwich) {
         boolean premiumToppingValid = false;
         while (!premiumToppingValid) {
-            System.out.println("Select a Premium Topping");
             System.out.println("""
+                    =================================
+                     SELECT PREMIUM TOPPINGS
+                    =================================
+                    
                     1) American Cheese
                     2) Provolone
                     3) Cheddar
                     4) Swiss
                     5) Skip Premium
-                    """);
+                    
+                    >""");
             String input = userInput.nextLine();
 
             switch (input) {
@@ -450,7 +513,7 @@ public class UI {
                     premiumToppingValid = true;
                     break;
                 default:
-                    System.out.println("Select Provided Options");
+                    System.out.println("INVALID OPTION — TRY AGAIN");
             }
         }
         if (!sandwich.getPremiumToppings().isEmpty()) {
@@ -462,10 +525,17 @@ public class UI {
         boolean extraCheeseSelectionActive = true;
         while (extraCheeseSelectionActive) {
             System.out.println("""
-                    Do you want extra cheese (EXTRA CHARGE APPLIED)
+                    =================================
+                          EXTRA CHEESE OPTION
+                    =================================
+                    
+                    Do you want extra cheese?
+                    (Extra charge applied)
+                    
                     1) Yes
-                    2) NO
-                    """);
+                    2) No
+                    
+                    >""");
             String input = userInput.nextLine();
             switch (input) {
                 case "1":
@@ -476,7 +546,7 @@ public class UI {
                     extraCheeseSelectionActive = false;
                     break;
                 default:
-                    System.out.println("Select provided options");
+                    System.out.println("INVALID OPTION — TRY AGAIN");
             }
         }
     }
@@ -484,16 +554,17 @@ public class UI {
     private static void selectMeat(Sandwich sandwich) {
         boolean sandwichMeatValid = false;
         while (!sandwichMeatValid) {
-            System.out.println("Select Meat options");
             System.out.println("""
-                    1) Steak
-                    2) Ham
-                    3) Salami
-                    4) Roast Beef
-                    5) Chicken
-                    6) Bacon
+                    =================================
+                         SELECT MEAT OPTIONS
+                    =================================
+                    
+                    1) Steak         2) Ham
+                    3) Salami        4) Roast Beef
+                    5) Chicken       6) Bacon
                     7) Skip Meats
-                    """);
+                    
+                    >""");
 
             String input = userInput.nextLine();
 
@@ -526,7 +597,7 @@ public class UI {
                     sandwichMeatValid = true;
                     break;
                 default:
-                    System.out.println("Select an OPTION");
+                    System.out.println("INVALID OPTION — TRY AGAIN");
 
             }
         }
@@ -540,10 +611,17 @@ public class UI {
         boolean extraMeatSelectionActive = true;
         while (extraMeatSelectionActive) {
             System.out.println("""
-                    Do you want extra meat (EXTRA CHARGE APPLIED)
+                    =================================
+                          EXTRA MEAT OPTION
+                    =================================
+                    
+                    Do you want extra meat?
+                    (Extra charge applied)
+                    
                     1) Yes
-                    2) NO
-                    """);
+                    2) No
+                    
+                    >""");
             String input = userInput.nextLine();
             switch (input) {
                 case "1":
@@ -554,19 +632,23 @@ public class UI {
                     extraMeatSelectionActive = false;
                     break;
                 default:
-                    System.out.println("Select provided options");
+                    System.out.println("INVALID OPTION — TRY AGAIN");
             }
         }
     }
 
     private static Size getSize(Size size) {
         while (size == null) {
-            System.out.println("Select Sandwich Size");
             System.out.println("""
+                    =================================
+                       SELECT SANDWICH SIZE
+                    =================================
+                    
                     1) Small
                     2) Medium
                     3) Large
-                    """);
+                    
+                    >""");
             String input = userInput.nextLine();
 
             switch (input) {
@@ -580,7 +662,7 @@ public class UI {
                     size = Size.LARGE;
                     break;
                 default:
-                    System.out.println("Please select from provided options");
+                    System.out.println("INVALID OPTION — TRY AGAIN");
             }
         }
         return size;
@@ -588,13 +670,17 @@ public class UI {
 
     private static BreadType getBreadType(BreadType breadType) {
         while (breadType == null) {
-            System.out.println("Select your bread");
             System.out.println("""
+                    =================================
+                         SELECT YOUR BREAD
+                    =================================
+                    
                     1) White bread
                     2) Wheat bread
                     3) Rye bread
                     4) Wrap
-                    """);
+                    
+                    >""");
             String input = userInput.nextLine();
 
             switch (input) {
@@ -611,7 +697,7 @@ public class UI {
                     breadType = BreadType.WRAP;
                     break;
                 default:
-                    System.out.println("Please select from provided option");
+                    System.out.println("INVALID OPTION — TRY AGAIN");
             }
         }
         return breadType;

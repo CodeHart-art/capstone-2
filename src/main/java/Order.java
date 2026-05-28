@@ -24,31 +24,41 @@ public class Order {
     }
 
     public String getOrderInfo() {
-        String fullOrder = """
-                Here's your Order:
-                --------------------------------------
-                """;
+        StringBuilder fullOrder = new StringBuilder();
+
+        fullOrder.append("""
+            Here's your Order:
+            --------------------------------------
+            """);
 
         for (Product p : items) {
+
             String size;
+
             if (p.getSize() == null) {
                 size = "";
             } else {
                 size = p.getSize().toString();
             }
 
-            fullOrder += String.format(
+            fullOrder.append(String.format(
                     "%-20s %-10s $%.2f%n",
                     p.getName(),
                     size,
                     p.calculatedPrice()
-            );
+            ));
         }
 
-        fullOrder += "--------------------------------------\n";
-        fullOrder += String.format("%-20s %-10s $%.2f%n", "", "TOTAL", calculateTotal());
+        fullOrder.append("--------------------------------------\n");
 
-        return fullOrder;
+        fullOrder.append(String.format(
+                "%-20s %-10s $%.2f%n",
+                "",
+                "TOTAL",
+                calculateTotal()
+        ));
+
+        return fullOrder.toString();
     }
 
     public boolean isValidOrder() {

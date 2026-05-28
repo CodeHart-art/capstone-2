@@ -77,25 +77,70 @@ public class Sandwich extends Product {
         }
     }
 
-    public void removeTopping(Topping topping) {
-        if (topping.getType() == ToppingType.MEAT) {
-            meats.remove(topping);
-        } else if (topping.getType() == ToppingType.PREMIUM) {
-            premiumToppings.remove(topping);
-        } else if (topping.getType() == ToppingType.OTHER) {
-            otherToppings.remove(topping);
-        }
-    }
-
     public void addCondiment(String condiment) {
         condiments.add(condiment);
     }
 
-    public void removeCondiment(String condiment) {
-        condiments.remove(condiment);
+    @Override
+    public String toString(){
+        String sandwichInfo = "";
+
+        sandwichInfo += "========== SANDWICH ==========\n";
+
+        sandwichInfo += size + " " + breadType + " Sandwich\n";
+
+        sandwichInfo += "Toasted: " + isToasted + "\n";
+
+        sandwichInfo += "\nMeats:\n";
+
+        for (Topping t : meats) {
+            sandwichInfo += "- " + t.getName() + "\n";
+        }
+
+        if (meats.isEmpty()) {
+            sandwichInfo += "- None\n";
+        }
+
+        sandwichInfo += "\nPremium Toppings:\n";
+
+        for (Topping t : premiumToppings) {
+            sandwichInfo += "- " + t.getName() + "\n";
+        }
+
+        if (premiumToppings.isEmpty()) {
+            sandwichInfo += "- None\n";
+        }
+
+        sandwichInfo += "\nRegular Toppings:\n";
+
+        for (Topping t : otherToppings) {
+            sandwichInfo += "- " + t.getName() + "\n";
+        }
+
+        if (otherToppings.isEmpty()) {
+            sandwichInfo += "- None\n";
+        }
+
+        sandwichInfo += "\nSauces:\n";
+
+        for (String condiment : condiments) {
+            sandwichInfo += "- " + condiment + "\n";
+        }
+
+        if (condiments.isEmpty()) {
+            sandwichInfo += "- None\n";
+        }
+
+        sandwichInfo += "\nExtra Meat: " + extraMeat + "\n";
+        sandwichInfo += "Extra Cheese: " + extraCheese + "\n";
+
+        sandwichInfo += String.format("\nPrice: $%.2f%n", calculatedPrice());
+
+        sandwichInfo += "==============================";
+
+        return sandwichInfo;
     }
 
-    // TODO make more efficient check size  then do calculation
     @Override
     public double calculatedPrice() {
         double baseCost = 0;
