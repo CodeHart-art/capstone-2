@@ -428,6 +428,32 @@ public class UI {
                     System.out.println("Select Provided Options");
             }
         }
+        if (!sandwich.getPremiumToppings().isEmpty()) {
+            selectExtraCheese(sandwich);
+        }
+    }
+
+    private static void selectExtraCheese(Sandwich sandwich) {
+        boolean extraCheeseSelectionActive = true;
+        while (extraCheeseSelectionActive) {
+            System.out.println("""
+                    Do you want extra cheese (EXTRA CHARGE APPLIED)
+                    1) Yes
+                    2) NO
+                    """);
+            String input = userInput.nextLine();
+            switch (input) {
+                case "1":
+                    sandwich.enableExtraCheese();
+                    extraCheeseSelectionActive = false;
+                    break;
+                case "2":
+                    extraCheeseSelectionActive = false;
+                    break;
+                default:
+                    System.out.println("Select provided options");
+            }
+        }
     }
 
     private static void selectMeat(Sandwich sandwich) {
@@ -477,6 +503,33 @@ public class UI {
                 default:
                     System.out.println("Select an OPTION");
 
+            }
+        }
+
+        if (!sandwich.getMeats().isEmpty()) {
+            selectExtraMeat(sandwich);
+        }
+    }
+
+    private static void selectExtraMeat(Sandwich sandwich) {
+        boolean extraMeatSelectionActive = true;
+        while (extraMeatSelectionActive) {
+            System.out.println("""
+                    Do you want extra meat (EXTRA CHARGE APPLIED)
+                    1) Yes
+                    2) NO
+                    """);
+            String input = userInput.nextLine();
+            switch (input) {
+                case "1":
+                    sandwich.enableExtraMeat();
+                    extraMeatSelectionActive = false;
+                    break;
+                case "2":
+                    extraMeatSelectionActive = false;
+                    break;
+                default:
+                    System.out.println("Select provided options");
             }
         }
     }

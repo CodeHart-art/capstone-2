@@ -9,6 +9,7 @@ public class Sandwich extends Product {
     private ArrayList<String> condiments;
     private boolean extraMeat;
     private boolean extraCheese;
+    private boolean isToasted;
 
     public Sandwich(String name, Size size, BreadType breadType) {
         super(name, size);
@@ -20,6 +21,7 @@ public class Sandwich extends Product {
         this.condiments = new ArrayList<>();
         this.extraMeat = false;
         this.extraCheese = false;
+        this.isToasted = false;
     }
 
     //region GETTERS and SETTERS
@@ -52,11 +54,11 @@ public class Sandwich extends Product {
         return extraCheese;
     }
 
-    public void setExtraCheese() {
+    public void enableExtraCheese() {
         extraCheese = true;
     }
 
-    public void setExtraMeat() {
+    public void enableExtraMeat() {
         extraCheese = true;
     }
     //endregion and SETTERS and
