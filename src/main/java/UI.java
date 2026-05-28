@@ -252,10 +252,35 @@ public class UI {
         selectPremiumTopping(sandwich);
         selectOtherTopping(sandwich);
         selectCondiments(sandwich);
+        selectToast(sandwich);
 
         previewSandwich(sandwich);
 
         confirmOrder(currentOrder, sandwich);
+    }
+
+    private static void selectToast(Sandwich sandwich) {
+
+        boolean toastSelectionActive = true;
+        while (toastSelectionActive) {
+            System.out.println("""
+                    Do you want your sandwich toasted?
+                    1) Yes
+                    2) NO
+                    """);
+            String input = userInput.nextLine();
+            switch (input) {
+                case "1":
+                    sandwich.setToasted(true);
+                    toastSelectionActive = false;
+                    break;
+                case "2":
+                    toastSelectionActive = false;
+                    break;
+                default:
+                    System.out.println("Select provided options");
+            }
+        }
     }
 
     private static void confirmOrder(Order currentOrder, Sandwich sandwich) {
@@ -444,7 +469,7 @@ public class UI {
             String input = userInput.nextLine();
             switch (input) {
                 case "1":
-                    sandwich.enableExtraCheese();
+                    sandwich.setExtraCheese(true);
                     extraCheeseSelectionActive = false;
                     break;
                 case "2":
@@ -522,7 +547,7 @@ public class UI {
             String input = userInput.nextLine();
             switch (input) {
                 case "1":
-                    sandwich.enableExtraMeat();
+                    sandwich.setExtraMeat(true);
                     extraMeatSelectionActive = false;
                     break;
                 case "2":

@@ -26,6 +26,10 @@ public class Sandwich extends Product {
 
     //region GETTERS and SETTERS
 
+    public void setToasted(boolean toasted) {
+        isToasted = toasted;
+    }
+
     public BreadType getBreadType() {
         return breadType;
     }
@@ -54,12 +58,12 @@ public class Sandwich extends Product {
         return extraCheese;
     }
 
-    public void enableExtraCheese() {
-        extraCheese = true;
+    public void setExtraCheese(boolean extraCheese) {
+        this.extraCheese = extraCheese;
     }
 
-    public void enableExtraMeat() {
-        extraCheese = true;
+    public void setExtraMeat(boolean extraMeat) {
+        this.extraMeat = extraMeat;
     }
     //endregion and SETTERS and
 
