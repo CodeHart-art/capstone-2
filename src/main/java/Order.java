@@ -62,22 +62,7 @@ public class Order {
     }
 
     public boolean isValidOrder() {
-
-        boolean hasSandwich = false;
-        boolean hasSide = false;
-
-        for (Product p : items) {
-
-            if (p instanceof Sandwich) {
-                hasSandwich = true;
-            }
-
-            if (p instanceof MainSide) {
-                hasSide = true;
-            }
-        }
-
-        return hasSandwich || hasSide;
+        return items.isEmpty();
     }
 
     public void clearOrder() {

@@ -82,8 +82,17 @@ public class UI {
 
     private static void checkout(Order currentOrder) {
 
-        if (!currentOrder.isValidOrder()) {
-            System.out.println("Order must contain a sandwich or side");
+        if (currentOrder.isValidOrder()) {
+            System.out.println("""
+                    =================================
+                          EMPTY ORDER ERROR
+                    =================================
+                    
+                    You must add at least 1 item
+                    before checking out.
+                    
+                    Returning to order menu...
+                    """);
             return;
         }
 
