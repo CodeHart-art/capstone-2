@@ -243,146 +243,102 @@ public class UI {
         Size size = null;
 
 
-        while (breadType == null) {
-            System.out.println("Select your bread");
-            System.out.println("""
-                    1) White bread
-                    2) Wheat bread
-                    3) Rye bread
-                    4) Wrap
-                    """);
-            String input = userInput.nextLine();
-
-            switch (input) {
-                case "1":
-                    breadType = BreadType.WHITE;
-                    break;
-                case "2":
-                    breadType = BreadType.WHEAT;
-                    break;
-                case "3":
-                    breadType = BreadType.RYE;
-                    break;
-                case "4":
-                    breadType = BreadType.WRAP;
-                    break;
-                default:
-                    System.out.println("Please select from provided option");
-            }
-        }
-        while (size == null) {
-            System.out.println("Select Sandwich Size");
-            System.out.println("""
-                    1) Small
-                    2) Medium
-                    3) Large
-                    """);
-            String input = userInput.nextLine();
-
-            switch (input) {
-                case "1":
-                    size = Size.SMALL;
-                    break;
-                case "2":
-                    size = Size.MEDIUM;
-                    break;
-                case "3":
-                    size = Size.LARGE;
-                    break;
-                default:
-                    System.out.println("Please select from provided options");
-            }
-        }
+        breadType = getBreadType(breadType);
+        size = getSize(size);
 
         Sandwich sandwich = new Sandwich("Sandwich", size, breadType);
 
+        selectMeat(sandwich);
+        selectPremiumTopping(sandwich);
+        selectOtherTopping(sandwich);
+        selectCondiments(sandwich);
 
-        boolean sandwichMeatValid = false;
-        while (!sandwichMeatValid) {
-            System.out.println("Select Meat options");
+        previewSandwich(sandwich);
+
+        confirmOrder(currentOrder, sandwich);
+    }
+
+    private static void confirmOrder(Order currentOrder, Sandwich sandwich) {
+        boolean confirmSandwichActive = true;
+        while (confirmSandwichActive) {
             System.out.println("""
-                    1) Steak
-                    2) Ham
-                    3) Salami
-                    4) Roast Beef
-                    5) Chicken
-                    6) Bacon
-                    7) Skip Meats
+                    Would you like to keep this sandwich
+                    1) Yes
+                    2) No
                     """);
 
             String input = userInput.nextLine();
 
             switch (input) {
                 case "1":
-                    sandwich.addTopping(ToppingObjects.steak());
-                    sandwichMeatValid = true;
+                    currentOrder.addProduct(sandwich);
+                    confirmSandwichActive = false;
                     break;
                 case "2":
-                    sandwich.addTopping(ToppingObjects.ham());
-                    sandwichMeatValid = true;
-                    break;
-                case "3":
-                    sandwich.addTopping(ToppingObjects.salami());
-                    sandwichMeatValid = true;
-                    break;
-                case "4":
-                    sandwich.addTopping(ToppingObjects.roastBeef());
-                    sandwichMeatValid = true;
-                    break;
-                case "5":
-                    sandwich.addTopping(ToppingObjects.chicken());
-                    sandwichMeatValid = true;
-                    break;
-                case "6":
-                    sandwich.addTopping(ToppingObjects.bacon());
-                    sandwichMeatValid = true;
-                    break;
-                case "7":
-                    sandwichMeatValid = true;
+                    confirmSandwichActive = false;
                     break;
                 default:
-                    System.out.println("Select an OPTION");
-
+                    System.out.println("Select provided options");
             }
         }
+    }
 
-        boolean premiumToppingValid = false;
-        while (!premiumToppingValid) {
-            System.out.println("Select a Premium Topping");
+    private static void previewSandwich(Sandwich sandwich) {
+        System.out.println("Here's your sandwich");
+        System.out.println("----------");
+
+        System.out.println(sandwich.getBreadType());
+        System.out.println(sandwich.getSize());
+        for (String condiment : sandwich.getCondiments()) {
+            System.out.println(condiment);
+        }
+
+        for (Topping t : sandwich.getMeats()) {
+            System.out.println(t.getName());
+        }
+
+        for (Topping t : sandwich.getPremiumToppings()) {
+            System.out.println(t.getName());
+        }
+
+        for (Topping t : sandwich.getOtherToppings()) {
+            System.out.println(t.getName());
+        }
+    }
+
+    private static void selectCondiments(Sandwich sandwich) {
+        boolean condimentSelectionActive = false;
+        while (!condimentSelectionActive) {
+            System.out.println("Select a sauce");
             System.out.println("""
-                    1) American Cheese
-                    2) Provolone
-                    3) Cheddar
-                    4) Swiss
-                    5) Skip Premium
+                    1) Mayo
+                    2) Ketchup
+                    3) All Sauces
                     """);
             String input = userInput.nextLine();
 
             switch (input) {
                 case "1":
-                    sandwich.addTopping(ToppingObjects.americanCheese());
-                    premiumToppingValid = true;
+                    sandwich.addCondiment("Mayo");
+                    condimentSelectionActive = true;
                     break;
                 case "2":
-                    sandwich.addTopping(ToppingObjects.provoloneCheese());
-                    premiumToppingValid = true;
+                    sandwich.addCondiment("Ketchup");
+                    condimentSelectionActive = true;
                     break;
                 case "3":
-                    sandwich.addTopping(ToppingObjects.cheddarCheese());
-                    premiumToppingValid = true;
-                    break;
-                case "4":
-                    sandwich.addTopping(ToppingObjects.swissCheese());
-                    premiumToppingValid = true;
-                    break;
-                case "5":
-                    premiumToppingValid = true;
+                    sandwich.addCondiment("MayoChup");
+                    condimentSelectionActive = true;
                     break;
                 default:
-                    System.out.println("Select Provided Options");
+                    System.out.println("Select provided options");
+
+
             }
         }
+    }
 
+    private static void selectOtherTopping(Sandwich sandwich) {
         boolean toppingSelectionActive = true;
         while (toppingSelectionActive) {
             System.out.println("Select Extra Toppings");
@@ -433,81 +389,154 @@ public class UI {
 
 
         }
+    }
 
-
-        boolean condimentSelectionActive = false;
-        while (!condimentSelectionActive) {
-            System.out.println("Select a sauce");
+    private static void selectPremiumTopping(Sandwich sandwich) {
+        boolean premiumToppingValid = false;
+        while (!premiumToppingValid) {
+            System.out.println("Select a Premium Topping");
             System.out.println("""
-                    1) Mayo
-                    2) Ketchup
-                    3) All Sauces
+                    1) American Cheese
+                    2) Provolone
+                    3) Cheddar
+                    4) Swiss
+                    5) Skip Premium
                     """);
             String input = userInput.nextLine();
 
             switch (input) {
                 case "1":
-                    sandwich.addCondiment("Mayo");
-                    condimentSelectionActive = true;
+                    sandwich.addTopping(ToppingObjects.americanCheese());
+                    premiumToppingValid = true;
                     break;
                 case "2":
-                    sandwich.addCondiment("Ketchup");
-                    condimentSelectionActive = true;
+                    sandwich.addTopping(ToppingObjects.provoloneCheese());
+                    premiumToppingValid = true;
                     break;
                 case "3":
-                    sandwich.addCondiment("MayoChup");
-                    condimentSelectionActive = true;
+                    sandwich.addTopping(ToppingObjects.cheddarCheese());
+                    premiumToppingValid = true;
+                    break;
+                case "4":
+                    sandwich.addTopping(ToppingObjects.swissCheese());
+                    premiumToppingValid = true;
+                    break;
+                case "5":
+                    premiumToppingValid = true;
                     break;
                 default:
-                    System.out.println("Select provided options");
-
-
+                    System.out.println("Select Provided Options");
             }
         }
+    }
 
-        System.out.println("Here's your sandwich");
-        System.out.println("----------");
-
-        System.out.println(sandwich.getBreadType());
-        System.out.println(sandwich.getSize());
-        for (String condiment : sandwich.getCondiments()) {
-            System.out.println(condiment);
-        }
-
-        for (Topping t : sandwich.getMeats()) {
-            System.out.println(t.getName());
-        }
-
-        for (Topping t : sandwich.getPremiumToppings()) {
-            System.out.println(t.getName());
-        }
-
-        for (Topping t : sandwich.getOtherToppings()) {
-            System.out.println(t.getName());
-        }
-
-        boolean confirmSandwichActive = true;
-        while (confirmSandwichActive) {
+    private static void selectMeat(Sandwich sandwich) {
+        boolean sandwichMeatValid = false;
+        while (!sandwichMeatValid) {
+            System.out.println("Select Meat options");
             System.out.println("""
-                    Would you like to keep this sandwich
-                    1) Yes
-                    2) No
+                    1) Steak
+                    2) Ham
+                    3) Salami
+                    4) Roast Beef
+                    5) Chicken
+                    6) Bacon
+                    7) Skip Meats
                     """);
 
             String input = userInput.nextLine();
 
             switch (input) {
                 case "1":
-                    currentOrder.addProduct(sandwich);
-                    confirmSandwichActive = false;
+                    sandwich.addTopping(ToppingObjects.steak());
+                    sandwichMeatValid = true;
                     break;
                 case "2":
-                    confirmSandwichActive = false;
+                    sandwich.addTopping(ToppingObjects.ham());
+                    sandwichMeatValid = true;
+                    break;
+                case "3":
+                    sandwich.addTopping(ToppingObjects.salami());
+                    sandwichMeatValid = true;
+                    break;
+                case "4":
+                    sandwich.addTopping(ToppingObjects.roastBeef());
+                    sandwichMeatValid = true;
+                    break;
+                case "5":
+                    sandwich.addTopping(ToppingObjects.chicken());
+                    sandwichMeatValid = true;
+                    break;
+                case "6":
+                    sandwich.addTopping(ToppingObjects.bacon());
+                    sandwichMeatValid = true;
+                    break;
+                case "7":
+                    sandwichMeatValid = true;
                     break;
                 default:
-                    System.out.println("Select provided options");
+                    System.out.println("Select an OPTION");
+
             }
         }
+    }
+
+    private static Size getSize(Size size) {
+        while (size == null) {
+            System.out.println("Select Sandwich Size");
+            System.out.println("""
+                    1) Small
+                    2) Medium
+                    3) Large
+                    """);
+            String input = userInput.nextLine();
+
+            switch (input) {
+                case "1":
+                    size = Size.SMALL;
+                    break;
+                case "2":
+                    size = Size.MEDIUM;
+                    break;
+                case "3":
+                    size = Size.LARGE;
+                    break;
+                default:
+                    System.out.println("Please select from provided options");
+            }
+        }
+        return size;
+    }
+
+    private static BreadType getBreadType(BreadType breadType) {
+        while (breadType == null) {
+            System.out.println("Select your bread");
+            System.out.println("""
+                    1) White bread
+                    2) Wheat bread
+                    3) Rye bread
+                    4) Wrap
+                    """);
+            String input = userInput.nextLine();
+
+            switch (input) {
+                case "1":
+                    breadType = BreadType.WHITE;
+                    break;
+                case "2":
+                    breadType = BreadType.WHEAT;
+                    break;
+                case "3":
+                    breadType = BreadType.RYE;
+                    break;
+                case "4":
+                    breadType = BreadType.WRAP;
+                    break;
+                default:
+                    System.out.println("Please select from provided option");
+            }
+        }
+        return breadType;
     }
 }
 
