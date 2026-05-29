@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class ReceiptManager {
-    public static String FILE_PATH = "src/main/java/Receipts_Folder";
+    public static String FILE_PATH = "receipts";
 
 
     public static void writeReceipt(Order order) {
