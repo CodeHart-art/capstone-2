@@ -261,6 +261,7 @@ public class UI {
                 break;
             case "4":
                 name = "Dr Pepper";
+                break;
             default:
                 System.out.println("INVALID OPTION — TRY AGAIN");
         }
